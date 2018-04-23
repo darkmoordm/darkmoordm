@@ -2,10 +2,7 @@ package gameEngine;
 
 import org.lwjgl.Version;
 import org.lwjgl.glfw.*;
-import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.glfw.GLFW.*;
-import org.lwjgl.opengl.GL;
-import org.lwjgl.opengl.GL11;
 
 public class DisplayManager {
 
@@ -15,19 +12,28 @@ public class DisplayManager {
 
     public void createDisplay() {
         System.out.println(" LWJGL: " + Version.getVersion());
+        GLFWErrorCallback.createPrint(System.err).set();
         if (!glfwInit()) {
             throw new IllegalStateException("Unable to initialize GLFW");
         }
+
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
         window = glfwCreateWindow(WIDTH, HEIGHT, "Simple example", 0, 0);
+        glfwMakeContextCurrent(window);
+        glfwSwapInterval(1);
+
     }
 
     public void updateDisplay() {
+        glfwSwapBuffers(window);
         glfwPollEvents();
     }
 
     public void closeDisplay() {
         glfwDestroyWindow(window);
         glfwTerminate();
+        glfwSetErrorCallback(null).free();
     }
 
     public boolean isCloseRequested() {
