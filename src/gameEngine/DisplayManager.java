@@ -4,8 +4,6 @@ import org.lwjgl.Version;
 import org.lwjgl.glfw.*;
 import static org.lwjgl.glfw.GLFW.*;
 import org.lwjgl.opengl.*;
-import static org.lwjgl.opengl.GL11.*;
-
 
 public class DisplayManager {
 
@@ -29,8 +27,6 @@ public class DisplayManager {
     }
 
     public void updateDisplay() {
-        glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
