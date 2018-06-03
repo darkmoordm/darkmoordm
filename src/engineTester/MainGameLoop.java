@@ -16,15 +16,18 @@ public class MainGameLoop {
         Renderer renderer = new Renderer();
 
         float[] vertices = {
-            //left bottom ringle
             -0.5f, 0.5f, 0f,
             -0.5f, -0.5f, 0f,
-            0.5f, -0.5f, 0f,
-            //right top tringle
-            0.5f, -0.5f, 0f,
-            0.5f, 0.5f, 0f,
-            -0.5f, 0.5f, 0f,};
-        RawModel model = loader.loadVAO(vertices);
+            0.5f, -0.5f, 0f,            
+            0.5f, 0.5f, 0.0f,
+            };
+        
+        int[] indices = {
+            0,1,2,
+            0,2,3    
+        };
+        
+        RawModel model = loader.loadVAO(vertices, indices);
 
         while (!dm.isCloseRequested()) {
             renderer.prepare();

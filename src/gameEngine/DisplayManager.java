@@ -1,18 +1,21 @@
 package gameEngine;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.lwjgl.Version;
 import org.lwjgl.glfw.*;
 import static org.lwjgl.glfw.GLFW.*;
 import org.lwjgl.opengl.*;
 
 public class DisplayManager {
+    private final static Logger LOGGER = Logger.getLogger(DisplayManager.class.getName());
 
     private long window;
     private static final int WIDTH = 1280;
     private static final int HEIGHT = 720;
 
     public void createDisplay() {
-        System.out.println(" LWJGL: " + Version.getVersion());
+        LOGGER.log(Level.INFO, " LWJGL: " + Version.getVersion());
         GLFWErrorCallback.createPrint(System.err).set();
         if (!glfwInit()) {
             throw new IllegalStateException("Unable to initialize GLFW");
@@ -27,11 +30,13 @@ public class DisplayManager {
     }
 
     public void updateDisplay() {
+        LOGGER.log(Level.FINEST, "updateDisplay");
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
 
     public void closeDisplay() {
+        LOGGER.log(Level.INFO, "closeDisplay");
         glfwDestroyWindow(window);
         glfwTerminate();
         glfwSetErrorCallback(null).free();
