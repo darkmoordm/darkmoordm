@@ -1,6 +1,7 @@
 
 package gameEngine;
 
+
 import java.nio.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ public class Loader {
     private List<Integer> vaos = new ArrayList<Integer>();
     private List<Integer> vbos = new ArrayList<Integer>();
     
+    
     public RawModel loadVAO(float[] positions, int[] indices){
         int vaoID = createVAO();
         bindIndicesBuffer(indices);
@@ -21,6 +23,7 @@ public class Loader {
         return new RawModel(vaoID, indices.length);
     }
     
+      
     public void cleanUP(){
         for(int vao:vaos){
             GL30.glDeleteVertexArrays(vao);
@@ -28,6 +31,7 @@ public class Loader {
         for(int vbo:vbos){
             GL15.glDeleteBuffers(vbo);
         }
+        
     }
     
     private int createVAO(){
